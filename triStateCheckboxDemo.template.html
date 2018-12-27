@@ -1,0 +1,15 @@
+<label>
+    <input id="all-checkboxes" type="checkbox" data-indeterminate-checkbox data-child-list="model.people" data-property="state" data-ng-model="model.selectAll"> All State
+</label>
+<div data-ng-repeat="person in model.people" class="person">
+    <label>
+        <input type="checkbox" data-indeterminate-checkbox data-child-list="person.fruits" data-property="state" data-ng-model="person.allState"> {{person.name}}
+    </label>
+    <div data-ng-repeat="fruit in person.fruits" class="child-list">
+        <label>
+            <input type="checkbox" data-ng-model="fruit.state"> {{fruit.type}}
+        </label>
+    </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.js"></script>
