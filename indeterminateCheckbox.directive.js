@@ -9,6 +9,27 @@ platformAguraApp.directive('indeterminateCheckbox', [function () {
                 var property = attrs.property;
                 scope.targetArray = attrs.targetArray;
 
+                scope.setElementStatus = function (hasChecked, hasUnchecked) {
+
+                    // Determine which state to put the checkbox in
+                    if (hasChecked && hasUnchecked) {
+                        element.prop('checked', false);
+                        element.prop('indeterminate', true);
+
+                        if (modelCtrl) {
+                            modelCtrl.$setViewValue(false);
+
+                        }
+
+                    } else {
+                        element.prop('checked', hasChecked);
+                        element.prop('indeterminate', false);
+
+                        if (modelCtrl) {
+                            modelCtrl.$setViewValue(hasChecked);
+                        }
+                    }
+                };
                 // Bind the onChange event to update children
                 element.bind('change', function () {
                     scope.$apply(function () {
@@ -38,25 +59,7 @@ platformAguraApp.directive('indeterminateCheckbox', [function () {
                                 } else {
                                     hasUnchecked = true;
                                 }
-
-                                // Determine which state to put the checkbox in
-                                if (hasChecked && hasUnchecked) {
-                                    element.prop('checked', false);
-                                    element.prop('indeterminate', true);
-
-                                    if (modelCtrl) {
-                                        modelCtrl.$setViewValue(false);
-
-                                    }
-
-                                } else {
-                                    element.prop('checked', hasChecked);
-                                    element.prop('indeterminate', false);
-
-                                    if (modelCtrl) {
-                                        modelCtrl.$setViewValue(hasChecked);
-                                    }
-                                }
+                                scope.setElementStatus(hasChecked, hasUnchecked);
                             });
                         } else {
                             if (child[property]) {
@@ -64,26 +67,7 @@ platformAguraApp.directive('indeterminateCheckbox', [function () {
                             } else {
                                 hasUnchecked = true;
                             }
-
-
-                            // Determine which state to put the checkbox in
-                            if (hasChecked && hasUnchecked) {
-                                element.prop('checked', false);
-                                element.prop('indeterminate', true);
-
-                                if (modelCtrl) {
-                                    modelCtrl.$setViewValue(false);
-
-                                }
-
-                            } else {
-                                element.prop('checked', hasChecked);
-                                element.prop('indeterminate', false);
-
-                                if (modelCtrl) {
-                                    modelCtrl.$setViewValue(hasChecked);
-                                }
-                            }
+                            scope.setElementStatus(hasChecked, hasUnchecked);
                         }
 
                     });
