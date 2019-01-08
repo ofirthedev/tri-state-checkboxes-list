@@ -1,4 +1,7 @@
- $scope.disableTwo = function (parent, child, target) {
+/*
+NOTE: THIS IS A HELPER IF YOU WANT TO TURN YOUR CHECKBOXES TO ACT LIKE RADIO BUTTONS [IF THE ALLOW IF CHECKED , THE DENY IS UNCHECKED]
+*/
+$scope.disableTwo = function (parent, child, target) {
         if (child !== 'null' && parent !== 'null') { //child case
             if (target === 'deny')
                 $rootScope.functionsList.functions[parent].rolesList[child].allow = false;
